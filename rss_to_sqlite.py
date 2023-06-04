@@ -14,7 +14,7 @@ TABLE_NAME = "tweets"
 db = sqlite_utils.Database(DATABASE_FILE)
 
 # Create the table if it doesn't exist
-db[TABLE_NAME].create({"id": int, "title": str, "link": str}, pk="id", foreign_keys=[])
+db[TABLE_NAME].create({"id": int, "title": str, "link": str}, pk="id", foreign_keys=[], if_not_exists=True)
 
 # Fetch the RSS feed
 feed = feedparser.parse(FEED_URL)
