@@ -8,7 +8,7 @@ FEED_URL = "https://nitter.net/LutfurRahmanTH/rss"
 DATABASE_FILE = "data.db"
 
 # Table name for storing RSS feed items
-TABLE_NAME = "rss_items"
+TABLE_NAME = "tweets"
 
 # Connect to the SQLite database
 db = sqlite_utils.Database(DATABASE_FILE)
