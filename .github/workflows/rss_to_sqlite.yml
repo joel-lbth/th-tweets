@@ -26,6 +26,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install feedparser
           pip install sqlite-utils
+          pip install datasette
 
       - name: Pull RSS feed and upsert to SQLite
         run: |
