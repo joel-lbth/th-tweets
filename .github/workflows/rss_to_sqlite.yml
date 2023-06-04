@@ -1,0 +1,28 @@
+name: RSS to SQLite
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Run every hour
+
+jobs:
+  rss_to_sqlite:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install feedparser
+          pip install sqlite-utils
+
+      - name: Pull RSS feed and upsert to SQLite
+        run: |
+          python rss_to_sqlite.py
