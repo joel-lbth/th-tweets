@@ -4,9 +4,9 @@ on:
   schedule:
     - cron: '0 * * * *'  # Run every hour
   workflow_dispatch: {}
-#   push:
-#     paths:
-#       - .github/workflows/rss_to_sqlite.yml
+  push:
+    paths:
+      - .github/workflows/rss_to_sqlite.yml
 
 jobs:
   rss_to_sqlite:
