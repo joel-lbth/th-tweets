@@ -14,7 +14,7 @@ TABLE_NAME = "tweets"
 db = sqlite_utils.Database(DATABASE_FILE)
 
 # Create the table if it doesn't exist
-db[table_name].create({"id": int, "title": str, "link": str}, pk="id", foreign_keys=[])
+db[TABLE_NAME].create({"id": int, "title": str, "link": str}, pk="id", foreign_keys=[])
 
 # Fetch the RSS feed
 feed = feedparser.parse(FEED_URL)
@@ -26,6 +26,6 @@ for entry in feed.entries:
         "title": entry.title,
         "link": entry.link
     }
-    db[table_name].upsert(record, pk="id")
+    db[TABLE_NAME].upsert(record, pk="id")
 
 print("RSS feed upserted to SQLite successfully.")
