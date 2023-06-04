@@ -4,9 +4,9 @@ on:
   schedule:
     - cron: '0 * * * *'  # Run every hour
   workflow_dispatch: {}
-  push:
-    paths:
-      - .github/workflows/rss_to_sqlite.yml
+#   push:
+#     paths:
+#       - .github/workflows/rss_to_sqlite.yml
 
 jobs:
   rss_to_sqlite:
@@ -40,3 +40,11 @@ jobs:
           git add *
           git commit -m "Latest data: ${timestamp}" || exit 0
           git push
+      
+      - name: Deploy Datasette using Vercel
+        env:
+          NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
+        run: |-
+          datasette publish vercel data.db --install=datasette-vega \
+            --token $NOW_TOKEN \
+            --project tower-hamlets-feeds
