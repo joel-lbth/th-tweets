@@ -3,6 +3,7 @@ name: RSS to SQLite
 on:
   schedule:
     - cron: '0 * * * *'  # Run every hour
+  workflow_dispatch: {}
 
 jobs:
   rss_to_sqlite:
