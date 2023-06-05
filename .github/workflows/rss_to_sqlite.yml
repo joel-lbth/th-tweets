@@ -27,6 +27,7 @@ jobs:
           pip install feedparser
           pip install sqlite-utils
           pip install datasette
+          pip install datasette-publish-vercel
 
       - name: Pull RSS feed and upsert to SQLite
         run: |
