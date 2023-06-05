@@ -1,31 +1,5 @@
-import feedparser
-import sqlite_utils
+from feed_to_sqlite import ingest_feed
 
-# RSS feed URL
-FEED_URL = "https://nitter.net/LutfurRahmanTH/rss"
-
-# SQLite database file
-DATABASE_FILE = "data.db"
-
-# Table name for storing RSS feed items
-TABLE_NAME = "tweets"
-
-# Connect to the SQLite database
-db = sqlite_utils.Database(DATABASE_FILE)
-
-# Create the table if it doesn't exist
-db[TABLE_NAME].create({"id": int, "title": str, "link": str}, pk="id", foreign_keys=[], if_not_exists=True)
-
-# Fetch the RSS feed
-feed = feedparser.parse(FEED_URL)
-
-# Upsert the latest records
-for entry in feed.entries:
-    record = {
-        "id": int(entry.id),
-        "title": entry.title,
-        "link": entry.link
-    }
-    db[TABLE_NAME].upsert(record, pk="id")
+ingest_feed(db="data.db", url="https://nitter.net/lutfurrahmanth/rss", table_name="lutfur_tweets")
 
 print("RSS feed upserted to SQLite successfully.")
